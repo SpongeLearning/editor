@@ -1,12 +1,23 @@
+import { configureStore } from "@reduxjs/toolkit";
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import LoadingManager from "src/component/LoadingManager";
 
 import App from "./App";
+import rootReducer from "./reducer";
 import * as serviceWorker from "./serviceWorker";
 
+const store = configureStore({
+    reducer: rootReducer,
+});
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <Provider store={store}>
+            <LoadingManager>
+                <App />
+            </LoadingManager>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
