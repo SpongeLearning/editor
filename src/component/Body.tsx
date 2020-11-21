@@ -1,67 +1,62 @@
-import { makeStyles } from "@material-ui/styles";
 import {
-    CustomTab,
     DIRECTION,
-    ILayoutNode,
+    INode,
     Layout,
-    LayoutNode,
     NODE_TYPE,
-    Provider as WidgetLayoutProvider,
-} from "@spongelearning/widget-layout";
+    Provider,
+} from "@idealjs/layout-manager";
+import { makeStyles } from "@material-ui/styles";
 import React from "react";
 
 import Sidebar from "./Sidebar";
 import TextEditor from "./TextEditor";
 import ViewPort from "./ViewPort";
 
-const layout: ILayoutNode = {
-    id: "root",
-    type: NODE_TYPE.LAYOUT_NODE,
-    direction: DIRECTION.ROW,
-    children: [
-        {
-            id: "sidebar-widget",
-            type: NODE_TYPE.WIDGET_NODE,
-            children: [
-                {
-                    id: "sidebar",
-                    type: NODE_TYPE.PANEL,
-                    Page: () => <Sidebar />,
-                    Tab: CustomTab,
-                    title: "sidebar",
-                },
-            ],
-        },
-        {
-            id: "main-widget",
-            type: NODE_TYPE.WIDGET_NODE,
-            children: [
-                {
-                    id: "main",
-                    type: NODE_TYPE.PANEL,
-                    Page: () => <TextEditor />,
-                    Tab: CustomTab,
-                    title: "main",
-                },
-            ],
-        },
-        {
-            id: "view-widget",
-            type: NODE_TYPE.WIDGET_NODE,
-            children: [
-                {
-                    id: "view",
-                    type: NODE_TYPE.PANEL,
-                    Page: () => <ViewPort id={"view"} />,
-                    Tab: CustomTab,
-                    title: "view",
-                },
-            ],
-        },
-    ],
-};
-
-const rootNode = new LayoutNode(layout);
+const nodes: INode[] = [
+    {
+        id: "root",
+        type: NODE_TYPE.LAYOUT_NODE,
+        parentId: "",
+        direction: DIRECTION.ROW,
+        children: ["A", "B", "C"],
+    },
+    {
+        id: "A",
+        type: NODE_TYPE.WIDGET_NODE,
+        parentId: "root",
+        children: ["A_A"],
+    },
+    {
+        id: "A_A",
+        type: NODE_TYPE.PANEL,
+        parentId: "A",
+        Page: () => <Sidebar />,
+    },
+    {
+        id: "B",
+        type: NODE_TYPE.WIDGET_NODE,
+        parentId: "root",
+        children: ["B_A"],
+    },
+    {
+        id: "B_A",
+        type: NODE_TYPE.PANEL,
+        parentId: "B",
+        Page: () => <TextEditor />,
+    },
+    {
+        id: "C",
+        type: NODE_TYPE.WIDGET_NODE,
+        parentId: "root",
+        children: ["C_A"],
+    },
+    {
+        id: "C_A",
+        type: NODE_TYPE.PANEL,
+        parentId: "C",
+        Page: () => <ViewPort id={"view"} />,
+    },
+];
 
 const useStyle = makeStyles({
     root: {
@@ -75,9 +70,9 @@ const Body = () => {
     const classes = useStyle();
     return (
         <div className={classes.root}>
-            <WidgetLayoutProvider value={rootNode}>
-                <Layout nodeId={rootNode.id} />
-            </WidgetLayoutProvider>
+            <Provider value={nodes}>
+                <Layout nodeId="root" />
+            </Provider>
         </div>
     );
 };

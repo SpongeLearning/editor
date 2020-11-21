@@ -1139,10 +1139,18 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@interactjs/types@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.npm.taobao.org/@interactjs/types/download/@interactjs/types-1.10.0.tgz#c2232ed3ba503891349912fa74aa05aa467403e9"
-  integrity sha1-wiMu07pQOJE0mRL6dKoFqkZ0A+k=
+"@idealjs/drag-drop@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npm.taobao.org/@idealjs/drag-drop/download/@idealjs/drag-drop-0.1.0.tgz?cache=0&sync_timestamp=1605967982220&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40idealjs%2Fdrag-drop%2Fdownload%2F%40idealjs%2Fdrag-drop-0.1.0.tgz#e3d4d3ceef826dfc2405fa52efd9a5240b9230b4"
+  integrity sha1-49TTzu+CbfwkBfpS79mlJAuSMLQ=
+
+"@idealjs/layout-manager@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npm.taobao.org/@idealjs/layout-manager/download/@idealjs/layout-manager-0.1.0.tgz#f3b8ddd9c04c5075b7214142d0091452b287004a"
+  integrity sha1-87jd2cBMUHW3IUFC0AkUUrKHAEo=
+  dependencies:
+    "@reduxjs/toolkit" "^1.4.0"
+    lodash "^4.17.20"
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -1376,16 +1384,6 @@
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.3.tgz#5405ee8e444ed212db44e79351f0c70a582aae25"
   integrity sha512-DetpxZw1fzPD5xUBrIAoplLChO2VB8DlL5Gg+I1IR9b2wPqYIca2WSUxL5g1vLeR4MsQq1NeWriXAVffV+U1Fw==
-
-"@spongelearning/widget-layout@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@spongelearning/widget-layout/-/widget-layout-0.1.7.tgz#382ea331729ebe86c02300dc6f3cbea643930986"
-  integrity sha512-xXJKxYFeph1x0urm+E6JmqfaMqkcr/vl+2wCFPMnsyZbhzDZpf7rsJzGjeIyCXKR+tgxOxgxq8nrmS8bnc3s2w==
-  dependencies:
-    "@material-ui/styles" "^4.10.0"
-    clsx "^1.1.1"
-    interactjs "^1.9.22"
-    lodash "^4.17.20"
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
@@ -3090,7 +3088,7 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
-clsx@^1.0.4, clsx@^1.1.1:
+clsx@^1.0.4:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/clsx/download/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha1-mLMTT5q73yOyZjSRrOE8XAOnMYg=
@@ -5509,13 +5507,6 @@ inquirer@^7.0.0:
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
     through "^2.3.6"
-
-interactjs@^1.9.22:
-  version "1.10.0"
-  resolved "https://registry.npm.taobao.org/interactjs/download/interactjs-1.10.0.tgz#0fafd725b1fddfc9671cacd98c4f92ceae73a197"
-  integrity sha1-D6/XJbH938lnHKzZjE+Szq5zoZc=
-  dependencies:
-    "@interactjs/types" "1.10.0"
 
 internal-ip@^4.3.0:
   version "4.3.0"
