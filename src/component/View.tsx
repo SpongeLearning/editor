@@ -1,4 +1,3 @@
-// import { NODE_EVENT, useNode } from "@spongelearning/widget-layout";
 import * as OIMO from "oimo";
 import React, {
     forwardRef,
@@ -298,12 +297,9 @@ const View = memo(
             reqContainer.current = requestAnimationFrame(update);
         }, [camera, controls, oimoUpdate, renderer, scene]);
 
-        // useEffect(() => {
-        //     node?.addListener(NODE_EVENT.UPDATE, layoutUpdate);
-        //     return () => {
-        //         node?.removeListener(NODE_EVENT.UPDATE, layoutUpdate);
-        //     };
-        // }, [layoutUpdate, node]);
+        useEffect(()=>{
+            layoutUpdate();
+        })
 
         useEffect(() => {
             sceneInit();
