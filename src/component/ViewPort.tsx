@@ -1,20 +1,30 @@
-import React, { memo, useCallback, useContext, useRef, useState } from "react";
+import React, {
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/reducer";
 import { selectAllFile } from "src/reducer/files";
-import * as THREE from "three";
+import { Scene } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import { context as loadingManagerContext } from "./LoadingManager";
 import View from "./View";
 
-const ViewPort = memo((props: { id: string }) => {
+const ViewPort = (props: { id: string }) => {
     const { id } = props;
-    const ref = useRef<THREE.Scene>(null);
+    const ref = useRef<{ scene: Scene; layoutUpdate: () => void }>(null);
     const loadingManager = useContext(loadingManagerContext);
     const [loader] = useState(new GLTFLoader(loadingManager));
 
     const files = useSelector((state: RootState) => selectAllFile(state.files));
+
+    useEffect(() => {
+        ref.current?.layoutUpdate();
+    });
 
     const addModel = useCallback(() => {
         files.forEach((file) => {
@@ -23,7 +33,7 @@ const ViewPort = memo((props: { id: string }) => {
                     file.path,
                     (gltf) => {
                         console.log("loaded", gltf);
-                        ref.current?.add(gltf.scene);
+                        ref.current?.scene.add(gltf.scene);
                     },
                     (event) => {
                         console.log("loading", event);
@@ -44,6 +54,6 @@ const ViewPort = memo((props: { id: string }) => {
             <View ref={ref} id={id} />
         </div>
     );
-});
+};
 
 export default ViewPort;
