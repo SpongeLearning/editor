@@ -8,8 +8,22 @@ import React, {
     useRef,
     useState,
 } from "react";
-import * as THREE from "three";
-import { Scene } from "three";
+// import * as THREE from "three";
+import {
+    AmbientLight,
+    BoxGeometry,
+    BufferGeometry,
+    Color,
+    CylinderGeometry,
+    DirectionalLight,
+    Mesh,
+    MeshBasicMaterial,
+    PerspectiveCamera,
+    Scene,
+    SphereGeometry,
+    Texture,
+    WebGLRenderer,
+} from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 function basicTexture(n: any) {
@@ -28,7 +42,7 @@ function basicTexture(n: any) {
     ctx.fillStyle = "rgba(0,0,0,0.2)";
     ctx.fillRect(0, 0, 32, 32);
     ctx.fillRect(32, 32, 32, 32);
-    var tx = new THREE.Texture(canvas);
+    var tx = new Texture(canvas);
     tx.needsUpdate = true;
     return tx;
 }
@@ -42,21 +56,19 @@ const View = memo(
 
             const ref = useRef<HTMLDivElement>(null);
 
-            const [scene] = useState(new THREE.Scene());
-            const [renderer] = useState(new THREE.WebGLRenderer());
+            const [scene] = useState(new Scene());
+            const [renderer] = useState(new WebGLRenderer());
             const [camera] = useState(
-                new THREE.PerspectiveCamera(
+                new PerspectiveCamera(
                     75,
                     window.innerWidth / window.innerHeight,
                     0.1,
                     1000
                 )
             );
-            const [light] = useState(new THREE.AmbientLight("white", 0.3));
-            const [dirLight] = useState(
-                new THREE.DirectionalLight("white", 0.8)
-            );
-            const [sceneBackgroundColor] = useState(new THREE.Color("white"));
+            const [light] = useState(new AmbientLight("white", 0.3));
+            const [dirLight] = useState(new DirectionalLight("white", 0.8));
+            const [sceneBackgroundColor] = useState(new Color("white"));
             const [controls] = useState(
                 new OrbitControls(camera, renderer.domElement)
             );
@@ -70,45 +82,45 @@ const View = memo(
             const [grounds] = useState<any[]>([]);
 
             const [mats] = useState({
-                sph: new THREE.MeshBasicMaterial({
+                sph: new MeshBasicMaterial({
                     map: basicTexture(0),
                     name: "sph",
                 }),
-                box: new THREE.MeshBasicMaterial({
+                box: new MeshBasicMaterial({
                     map: basicTexture(2),
                     name: "box",
                 }),
-                cyl: new THREE.MeshBasicMaterial({
+                cyl: new MeshBasicMaterial({
                     map: basicTexture(4),
                     name: "cyl",
                 }),
-                ssph: new THREE.MeshBasicMaterial({
+                ssph: new MeshBasicMaterial({
                     map: basicTexture(1),
                     name: "ssph",
                 }),
-                sbox: new THREE.MeshBasicMaterial({
+                sbox: new MeshBasicMaterial({
                     map: basicTexture(3),
                     name: "sbox",
                 }),
-                scyl: new THREE.MeshBasicMaterial({
+                scyl: new MeshBasicMaterial({
                     map: basicTexture(5),
                     name: "scyl",
                 }),
-                ground: new THREE.MeshBasicMaterial({
+                ground: new MeshBasicMaterial({
                     color: 0x3d4143,
                     transparent: true,
                     opacity: 0.5,
                 }),
             });
             const [geos] = useState({
-                sphere: new THREE.BufferGeometry().fromGeometry(
-                    new THREE.SphereGeometry(1, 16, 10)
+                sphere: new BufferGeometry().fromGeometry(
+                    new SphereGeometry(1, 16, 10)
                 ),
-                box: new THREE.BufferGeometry().fromGeometry(
-                    new THREE.BoxGeometry(1, 1, 1)
+                box: new BufferGeometry().fromGeometry(
+                    new BoxGeometry(1, 1, 1)
                 ),
-                cylinder: new THREE.BufferGeometry().fromGeometry(
-                    new THREE.CylinderGeometry(1, 1, 1)
+                cylinder: new BufferGeometry().fromGeometry(
+                    new CylinderGeometry(1, 1, 1)
                 ),
             });
             const [ToRad] = useState(0.0174532925199432957);
@@ -176,7 +188,7 @@ const View = memo(
 
             const addStaticBox = useCallback(
                 (size, position, rotation) => {
-                    var mesh = new THREE.Mesh(geos.box, mats.ground);
+                    var mesh = new Mesh(geos.box, mats.ground);
                     mesh.scale.set(size[0], size[1], size[2]);
                     mesh.position.set(position[0], position[1], position[2]);
                     mesh.rotation.set(
@@ -237,7 +249,7 @@ const View = memo(
                         move: true,
                         world: world,
                     });
-                    meshes[i] = new THREE.Mesh(geos.sphere, mats.sph);
+                    meshes[i] = new Mesh(geos.sphere, mats.sph);
                     meshes[i].scale.set(w * 0.5, w * 0.5, w * 0.5);
 
                     meshes[i].castShadow = true;
