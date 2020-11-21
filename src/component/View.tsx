@@ -35,7 +35,7 @@ function basicTexture(n: any) {
 //Don't make this FC refresh any more
 const View = memo(
     forwardRef<THREE.Scene, { id: string }>((props, sceneRef) => {
-        const { id } = props;
+        // const { id } = props;
         // const node = useNode(id);
 
         const ref = useRef<HTMLDivElement>(null);
@@ -297,9 +297,9 @@ const View = memo(
             reqContainer.current = requestAnimationFrame(update);
         }, [camera, controls, oimoUpdate, renderer, scene]);
 
-        useEffect(()=>{
+        useEffect(() => {
             layoutUpdate();
-        })
+        });
 
         useEffect(() => {
             sceneInit();

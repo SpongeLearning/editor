@@ -5,7 +5,6 @@ import {
     NODE_TYPE,
     Provider,
 } from "@idealjs/layout-manager";
-import { makeStyles } from "@material-ui/styles";
 import React from "react";
 
 import Sidebar from "./Sidebar";
@@ -58,18 +57,9 @@ const nodes: INode[] = [
     },
 ];
 
-const useStyle = makeStyles({
-    root: {
-        flex: 1,
-        height: "100%",
-        width: "100%",
-    },
-});
-
 const Body = () => {
-    const classes = useStyle();
     return (
-        <div className={classes.root}>
+        <div style={{ flex: 1, height: "100%", width: "100%" }}>
             <Provider value={nodes}>
                 <Layout nodeId="root" />
             </Provider>
