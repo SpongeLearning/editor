@@ -7,8 +7,8 @@ import {
 } from "@idealjs/layout-manager";
 import React from "react";
 
+import FileManager from "./FileManager";
 import Sidebar from "./Sidebar";
-import TextEditor from "./TextEditor";
 import ViewPort from "./ViewPort";
 
 const nodes: INode[] = [
@@ -41,7 +41,7 @@ const nodes: INode[] = [
         id: "B_A",
         type: NODE_TYPE.PANEL,
         parentId: "B",
-        Page: () => <TextEditor />,
+        Page: () => <FileManager />,
     },
     {
         id: "C",

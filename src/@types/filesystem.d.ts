@@ -31,3 +31,19 @@ interface DirectoryEntry extends Entry {
     getDirectory: any;
     getFile: any;
 }
+
+interface FileSystemHandle {
+    isSameEntry: () => any;
+    kind: string;
+    name: string;
+    queryPermission: () => any;
+    requestPermission: () => any;
+}
+
+interface FileSystemDirectoryHandle extends FileSystemHandle {
+    entries: () => any;
+    getDirectoryHandle: () => any;
+    getFileHandle: () => any;
+    keys: () => any;
+    values: () => any;
+}
